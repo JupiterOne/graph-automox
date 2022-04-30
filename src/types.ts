@@ -1,25 +1,103 @@
 // Providers often supply types with their API libraries.
-
-export interface AcmeUser {
-  id: string;
+export type AutomoxGroup = {
+  id: number;
+  organization_id: number;
   name: string;
-}
+  parent_server_group_id: number;
+  /*ui_color: string;
+  notes: string;
+  enable_os_auto_update: boolean | null;
+  server_count: number;
+  wsus_config: {
+    id: number;
+    server_group_id: number;
+    is_managed: boolean | null;
+    server_urlL: string | null;
+    created_at: string;
+    updated_at: string;
+  } | null;
+  policies: number[];*/
+};
 
-export interface AcmeGroup {
-  id: string;
+export type AutomoxDevice = {
+  id: number;
   name: string;
-  users?: Pick<AcmeUser, 'id'>[];
-}
+  server_group_id: number;
+  organization_id: number;
+  uuid: string;
 
-// Those can be useful to a degree, but often they're just full of optional
-// values. Understanding the response data may be more reliably accomplished by
-// reviewing the API response recordings produced by testing the wrapper client
-// (./client.ts). However, when there are no types provided, it is necessary to define
-// opaque types for each resource, to communicate the records that are expected
-// to come from an endpoint and are provided to iterating functions.
+  detail: {
+    CPU: string;
+    DISKS: {
+      SIZE: string;
+      TYPE: string;
+    }[];
+    MODEL: string;
+    NICS: {
+      CONNECTED: string;
+      DEVICE: string;
+      IP: string[];
+      MAC: string;
+      TYPE: string;
+      VENDOR: string;
+    }[];
+    RAM: string;
+    SERIAL: string;
+    SERVICETAG: string;
+    VENDOR: string;
+    VERSION: string;
+  };
 
-/*
-import { Opaque } from 'type-fest';
-export type AcmeUser = Opaque<any, 'AcmeUser'>;
-export type AcmeGroup = Opaque<any, 'AcmeGroup'>;
-*/
+  serial_number: string;
+
+  /*
+  os_version_id: string;
+  instance_id: string;
+  refresh_interval: number;
+  last_update_time: string;
+  last_refresh_time: string;
+  uptime: number;
+  needs_reboot: boolean;
+  timezone: string;
+  deleted: boolean;
+  create_time: string;
+  os_version: string;
+  os_name: string;
+  os_family: string;
+  patches: number;
+  cpu: string;
+  cpu_size: string;
+  cpu_type: string;
+  mode: string;
+  nics_connected: boolean;
+  nics_device: string;
+  nics_mac: string;
+  nics_type: string;
+  nics_vendor: string;
+  ram: string;
+  serial: string;
+  servicetag: string;
+  vendor: string;
+  version: string;
+
+  pending_patches: string;
+  connected: boolean;
+  last_process_time: string;
+  next_patch_time: string;
+  notification_count: number;
+  reboot_notification_count: number;
+  patch_deferral_count: number;
+  is_delayed_by_notification: boolean;
+  reboot_is_delayed_by_notification: boolean;
+  is_delayed_by_user: boolean;
+  reboot_is_delayed_by_user: boolean;
+  last_disconnect_time: string;
+  needs_attention: boolean;
+  serial_number: string;
+  device_status: string;
+  agent_status: string;
+  policy_status: string;
+
+
+  last_logged_in_user: string;*/
+};
