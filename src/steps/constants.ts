@@ -9,12 +9,13 @@ export const Steps = {
   ACCOUNT: 'fetch-account',
   DEVICES: 'fetch-devices',
   GROUPS: 'fetch-device-groups',
+  USERS: 'fetch-users',
   BUILD_DEVICE_GROUP_DEVICE_RELATIONSHIPS:
     'build-device-group-and-device-relationships',
 };
 
 export const Entities: Record<
-  'DEVICE' | 'ACCOUNT' | 'DEVICE_GROUP',
+  'DEVICE' | 'ACCOUNT' | 'DEVICE_GROUP' | 'USER',
   StepEntityMetadata
 > = {
   ACCOUNT: {
@@ -32,10 +33,18 @@ export const Entities: Record<
     _type: 'automox_device_group',
     _class: ['Group'],
   },
+  USER: {
+    resourceName: 'User',
+    _type: 'automox_user',
+    _class: ['User'],
+  },
 };
 
 export const Relationships: Record<
-  'ACCOUNT_HAS_DEVICE' | 'ACCOUNT_HAS_DEVICE_GROUP' | 'DEVICE_GROUP_HAS_DEVICE',
+  | 'ACCOUNT_HAS_DEVICE'
+  | 'ACCOUNT_HAS_DEVICE_GROUP'
+  | 'ACCOUNT_HAS_USER'
+  | 'DEVICE_GROUP_HAS_DEVICE',
   StepRelationshipMetadata
 > = {
   ACCOUNT_HAS_DEVICE: {
@@ -49,6 +58,12 @@ export const Relationships: Record<
     sourceType: Entities.ACCOUNT._type,
     _class: RelationshipClass.HAS,
     targetType: Entities.DEVICE_GROUP._type,
+  },
+  ACCOUNT_HAS_USER: {
+    _type: 'automox_account_has_user',
+    sourceType: Entities.ACCOUNT._type,
+    _class: RelationshipClass.HAS,
+    targetType: Entities.USER._type,
   },
   DEVICE_GROUP_HAS_DEVICE: {
     _type: 'automox_device_group_has_device',

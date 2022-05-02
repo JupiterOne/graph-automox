@@ -4,19 +4,20 @@ export type AutomoxGroup = {
   organization_id: number;
   name: string;
   parent_server_group_id: number;
-  /*ui_color: string;
-  notes: string;
-  enable_os_auto_update: boolean | null;
-  server_count: number;
-  wsus_config: {
+};
+
+export type AutomoxUser = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  orgs: {
     id: number;
-    server_group_id: number;
-    is_managed: boolean | null;
-    server_urlL: string | null;
-    created_at: string;
-    updated_at: string;
-  } | null;
-  policies: number[];*/
+    name: string;
+    access_key: string;
+    trial_end_time: string;
+    trial_expired: boolean;
+  }[];
 };
 
 export type AutomoxDevice = {

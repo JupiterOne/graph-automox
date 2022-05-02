@@ -76,7 +76,7 @@ describe('#validateInvocation', () => {
         // tests validate that invalid configurations throw an error
         // with an appropriate and expected message.
         await expect(validateInvocation(executionContext)).rejects.toThrow(
-          'Provider authentication failed at https://localhost/api/v1/some/endpoint?limit=1: 401 Unauthorized',
+          'Provider authentication failed at https://console.automox.com/api/servergroups?limit=500 401 Unauthorized',
         );
       });
     });

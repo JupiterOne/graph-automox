@@ -23,13 +23,7 @@ export function createDeviceGroupEntity(deviceGroup: AutomoxGroup): Entity {
     name: account_name,
     parent_server_group_id: deviceGroup.parent_server_group_id,
   };
-  // console.log(
-  //   Entities.DEVICE_GROUP._type,
-  //   Entities.DEVICE_GROUP._class,
-  //   getGroupKey(deviceGroup.organization_id.toString()),
-  //   deviceGroup.id.toString(),
-  //   account_name,
-  //   );
+
   return createIntegrationEntity({
     entityData: {
       source: newDeviceGroup,
@@ -40,14 +34,6 @@ export function createDeviceGroupEntity(deviceGroup: AutomoxGroup): Entity {
         id: newDeviceGroup.id.toString(),
         name: account_name,
         displayName: account_name,
-        //name: account_name,
-        //organizationId: group.organization_id.toString(),
-        //refreshInterval: group.refresh_interval.toString(),
-        //parentServerGroupId: group.parent_server_group_id.toString(),
-        //uiColor: group.ui_color,
-        //notes: group.notes,
-        //enableOsAutoUpdate: group.enable_os_auto_update,
-        //serverCount: group.server_count.toString(),
       },
     },
   });

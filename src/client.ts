@@ -6,7 +6,7 @@ import {
 } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from './config';
-import { AutomoxDevice, AutomoxGroup } from './types';
+import { AutomoxDevice, AutomoxGroup, AutomoxUser } from './types';
 
 import { retry } from '@lifeomic/attempt';
 
@@ -43,15 +43,16 @@ export class APIClient {
           return await fetch(endpoint, options);
         },
         {
-          delay: 5000,
-          maxAttempts: 10,
+          delay: 500,
+          maxAttempts: 1,
           handleError: (err, context) => {
             if (
               err.statusCode !== 429 ||
               ([500, 502, 503].includes(err.statusCode) &&
                 context.attemptNum > 1)
-            )
+            ) {
               context.abort();
+            }
           },
         },
       );
@@ -69,7 +70,7 @@ export class APIClient {
   public async verifyAuthentication(): Promise<void> {
     const uri = this.withBaseUri(`orgs?limit=${this.perPage}`);
     try {
-      await this.getRequest(uri);
+      await this.getRequest(`${uri}&page=0`);
     } catch (err) {
       throw new IntegrationProviderAuthenticationError({
         cause: err,
@@ -85,37 +86,17 @@ export class APIClient {
     method: 'GET' | 'HEAD' = 'GET',
     iteratee: ResourceIteratee<T>,
   ): Promise<void> {
-    let next = null;
+    //let next = null;
+    let page = 0;
+    let next = [];
     do {
-      const response = await this.getRequest(next || uri, method);
+      const response = await this.getRequest(`${uri}&page=${page}`, method);
       for (const item of response) {
         await iteratee(item);
       }
-      next = response.next;
-    } while (next);
-  }
-  private async devicePaginatedRequest<T>(
-    uri: string,
-    method: 'GET' | 'HEAD' = 'GET',
-    iteratee: ResourceIteratee<T>,
-  ): Promise<void> {
-    try {
-      let next = null;
-      do {
-        const response = await this.getRequest(next || uri, method);
-        for (const item of response) {
-          await iteratee(item);
-        }
-        next = response.next;
-      } while (next);
-    } catch (err) {
-      throw new IntegrationProviderAPIError({
-        cause: new Error(err.message),
-        endpoint: uri,
-        status: err.statusCode,
-        statusText: err.message,
-      });
-    }
+      next = response;
+      page++;
+    } while (next.length != 0);
   }
 
   public async iterateDevices(
@@ -133,6 +114,16 @@ export class APIClient {
   ): Promise<void> {
     await this.paginatedRequest<AutomoxGroup>(
       this.withBaseUri(`servergroups/?limit=${this.perPage}`),
+      'GET',
+      iteratee,
+    );
+  }
+
+  public async iterateUsers(
+    iteratee: ResourceIteratee<AutomoxUser>,
+  ): Promise<void> {
+    await this.paginatedRequest<AutomoxUser>(
+      this.withBaseUri(`users/?limit=${this.perPage}`),
       'GET',
       iteratee,
     );
