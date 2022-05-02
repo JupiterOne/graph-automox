@@ -27,24 +27,35 @@ export class APIClient {
   private withBaseUri = (path: string) => `${this.baseUri}${path}`;
   private perPage = 500;
 
-  private async getRequest(
-    endpoint: string,
-    method: 'GET' | 'HEAD' = 'GET',
-  ): Promise<Response> {
+  private async getRequest(endpoint: string, method: 'GET'): Promise<Response> {
     try {
+      const maxAttempts = 5;
       const options = {
         method,
         headers: {
           Authorization: `Bearer ${this.config.apiKey}`,
         },
+        timeout: 15000,
+        redirect: 'error',
       };
+
       const response = await retry(
         async () => {
-          return await fetch(endpoint, options);
+          try {
+            const fetch_response = await fetch(endpoint, options);
+            return fetch_response;
+          } catch (error) {}
         },
         {
-          delay: 500,
-          maxAttempts: 1,
+          timeout: 10000,
+          async handleTimeout() {
+            var curr_attempts = 1;
+            do {
+              const fetch_response = await fetch(endpoint, options);
+              curr_attempts++;
+              return fetch_response;
+            } while (curr_attempts < maxAttempts);
+          },
           handleError: (err, context) => {
             if (
               err.statusCode !== 429 ||
@@ -70,7 +81,7 @@ export class APIClient {
   public async verifyAuthentication(): Promise<void> {
     const uri = this.withBaseUri(`orgs?limit=${this.perPage}`);
     try {
-      await this.getRequest(`${uri}&page=0`);
+      await this.getRequest(`${uri}&page=0`, 'GET');
     } catch (err) {
       throw new IntegrationProviderAuthenticationError({
         cause: err,
@@ -83,7 +94,7 @@ export class APIClient {
 
   private async paginatedRequest<T>(
     uri: string,
-    method: 'GET' | 'HEAD' = 'GET',
+    method: 'GET',
     iteratee: ResourceIteratee<T>,
   ): Promise<void> {
     //let next = null;
@@ -91,12 +102,15 @@ export class APIClient {
     let next = [];
     do {
       const response = await this.getRequest(`${uri}&page=${page}`, method);
+      if (!response.length) {
+        break;
+      }
       for (const item of response) {
         await iteratee(item);
       }
       next = response;
       page++;
-    } while (next.length != 0);
+    } while (true);
   }
 
   public async iterateDevices(
