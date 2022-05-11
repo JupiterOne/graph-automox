@@ -16,7 +16,7 @@ import {
   ACCOUNT_ENTITY_KEY,
 } from '../constants';
 import { AutomoxDevice } from '../../types';
-import { createDeviceGroupEntity } from './converter';
+import { createDeviceGroupEntity, getGroupKey } from './converter';
 
 export async function fetchDeviceGroups({
   instance,
@@ -56,7 +56,7 @@ export async function buildGroupAndDeviceRelationships({
       }
 
       const isGroupEntity = await jobState.findEntity(
-        `automox_device_group:${device.server_group_id}`,
+        getGroupKey(device.server_group_id.toString()),
       );
 
       if (isGroupEntity)
