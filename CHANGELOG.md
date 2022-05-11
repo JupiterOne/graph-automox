@@ -7,3 +7,16 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+
+- Ingest new entities
+  - `automox_account`
+  - `automox_device`
+  - `automox_device_group`
+  - `automox_user`
+- Build new relationships
+  - `automox_account_has_automox_device`
+  - `automox_account_has_automox_device_group`
+  - `automox_account_has_automox_user`
+  - `automox_device_group_has_automox_device`

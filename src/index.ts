@@ -1,4 +1,5 @@
 import { IntegrationInvocationConfig } from '@jupiterone/integration-sdk-core';
+
 import { integrationSteps } from './steps';
 import {
   validateInvocation,

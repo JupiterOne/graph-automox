@@ -1,25 +1,61 @@
-// Providers often supply types with their API libraries.
-
-export interface AcmeUser {
-  id: string;
+export type AutomoxGroup = {
+  id: number;
+  organization_id: number;
   name: string;
-}
+  parent_server_group_id: number;
+};
 
-export interface AcmeGroup {
-  id: string;
+export type AutomoxUser = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  orgs: {
+    id: number;
+    name: string;
+    access_key: string;
+    trial_end_time: string;
+    trial_expired: boolean;
+  }[];
+  saml_enabled: boolean;
+  sso_enabled: boolean;
+};
+
+export type AutomoxDevice = {
+  id: number;
   name: string;
-  users?: Pick<AcmeUser, 'id'>[];
-}
-
-// Those can be useful to a degree, but often they're just full of optional
-// values. Understanding the response data may be more reliably accomplished by
-// reviewing the API response recordings produced by testing the wrapper client
-// (./client.ts). However, when there are no types provided, it is necessary to define
-// opaque types for each resource, to communicate the records that are expected
-// to come from an endpoint and are provided to iterating functions.
-
-/*
-import { Opaque } from 'type-fest';
-export type AcmeUser = Opaque<any, 'AcmeUser'>;
-export type AcmeGroup = Opaque<any, 'AcmeGroup'>;
-*/
+  server_group_id: number;
+  organization_id: number;
+  uuid: string;
+  compliant: boolean;
+  connected: boolean;
+  deleted: boolean;
+  detail: {
+    LAST_USER_LOGON: {
+      USER: string;
+      TIME: string;
+      SRC: string;
+    };
+    CPU: string;
+    DISKS: {
+      SIZE: string;
+      TYPE: string;
+    }[];
+    MODEL: string;
+    NICS: {
+      CONNECTED: string;
+      DEVICE: string;
+      IP: string[];
+      MAC: string;
+      TYPE: string;
+      VENDOR: string;
+    }[];
+    RAM: string;
+    SERIAL: string;
+    SERVICETAG: string;
+    VENDOR: string;
+    VERSION: string;
+  };
+  serial_number: string;
+  create_time: string;
+};
