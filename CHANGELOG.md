@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.0.0 - 2022-05-11
+
 ### Added
 
 - Ingest new entities
