@@ -1,4 +1,4 @@
-# Automox Integration with JupiterOne
+# Automox
 
 ## Automox + JupiterOne Integration Benefits
 
