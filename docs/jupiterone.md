@@ -32,10 +32,10 @@ If you need help with this integration, please contact
 
 ### In Automox
 
-1. Sign-up for a Automox account
-2. Take note of the provided domain
+1. Sign up for a Automox account.
+2. Take note of the provided domain.
 3. In the kebab menu on the console, go to Keys.
-4. Add an API key
+4. Add an API key.
 
 ### In JupiterOne
 
