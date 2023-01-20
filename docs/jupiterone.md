@@ -50,7 +50,7 @@ If you need help with this integration, please contact
   the integration instance.
 - Select a **Polling Interval** that you feel is sufficient for your monitoring
   needs. You may leave this as `DISABLED` and manually execute the integration.
-  Enter the **Automox API Key** generated for use by JupiterOne.
+  Enter the **Automox API Key** generated for use by JupiterOne. 
 
 4. Click **Create Configuration** once all values are provided.
 
