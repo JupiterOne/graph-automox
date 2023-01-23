@@ -20,7 +20,7 @@
 - Automox supports Bearer Authentication. You must have a Administrator user
   account.
 - JupiterOne requires a REST API key. You need permission to create a user in
-  Automox that will be used to obtain the API key.
+  Automox that is used to obtain the API key.
 - You must have permission in JupiterOne to install new integrations.
 
 ## Support
@@ -60,7 +60,7 @@ TODO: List specific actions that must be taken to uninstall the integration.
 Many of the following steps will be reusable; take care to be sure they remain
 accurate.
 
-1.From the top navigation of the J1 Search homepage, select **Integrations**.
+1. From the top navigation of the J1 Search homepage, select **Integrations**.
 2. Scroll to the Automox integration tile and click it.
 3. Identify and click the **integration to delete**.
 4. Click the **trash can** icon.
