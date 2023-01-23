@@ -20,7 +20,7 @@
 - Automox supports Bearer Authentication. You must have a Administrator user
   account.
 - JupiterOne requires a REST API key. You need permission to create a user in
-  Automox that will be used to obtain the API key.
+  Automox that is used to obtain the API key.
 - You must have permission in JupiterOne to install new integrations.
 
 ## Support
