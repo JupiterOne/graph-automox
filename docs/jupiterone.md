@@ -60,10 +60,11 @@ TODO: List specific actions that must be taken to uninstall the integration.
 Many of the following steps will be reusable; take care to be sure they remain
 accurate.
 
-1.From the top navigation of the J1 Search homepage, select **Integrations**. 2.
-Scroll to the Automox integration tile and click it. 3. Identify and click the
-**integration to delete**. 4. Click the **trash can** icon. 5. Click the
-**Remove** button to delete the integration.
+1. From the top navigation of the J1 Search homepage, select **Integrations**.
+2. Scroll to the Automox integration tile and click it.
+3. Identify and click the **integration to delete**.
+4. Click the **trash can** icon.
+5. Click the **Remove** button to delete the integration.
 
 <!-- {J1_DOCUMENTATION_MARKER_START} -->
 <!--
