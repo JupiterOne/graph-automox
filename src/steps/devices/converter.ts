@@ -31,7 +31,11 @@ export function createDeviceEntity(device: AutomoxDevice): Entity {
         model: device.detail.MODEL,
         serial: device.serial_number,
         deviceId: device.uuid,
+        lastProcessedOn: parseTimePropertyValue(device.last_process_time),
+        lastRefreshedOn: parseTimePropertyValue(device.last_refresh_time),
+        lastScanFailedOn: parseTimePropertyValue(device.last_scan_failed),
         createdOn: parseTimePropertyValue(device.create_time),
+        updatedOn: parseTimePropertyValue(device.last_update_time),
       },
     },
   });

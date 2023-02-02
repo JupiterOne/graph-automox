@@ -58,4 +58,8 @@ export type AutomoxDevice = {
   };
   serial_number: string;
   create_time: string;
+  last_process_time: string;
+  last_refresh_time: string;
+  last_scan_failed: string;
+  last_update_time: string;
 };
