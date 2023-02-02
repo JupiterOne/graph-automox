@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.1.0 - 2023-02-02
+
 ### Added
 
 - `automox_device` entities now have the following new properties:
