@@ -8,6 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- `automox_device` entities now have the following new properties:
+
+  | Property           | Type     |
+  | ------------------ | -------- |
+  | `updatedOn`        | `number` |
+  | `lastProcessedOn`  | `number` |
+  | `lastRefreshedOn`  | `number` |
+  | `lastScanFailedOn` | `number` |
+
 ## 1.0.0 - 2022-05-11
 
 ### Added
