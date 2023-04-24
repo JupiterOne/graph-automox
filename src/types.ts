@@ -60,7 +60,7 @@ export type AutomoxDevice = {
     device_status?: string;
     agent_status?: string;
     policy_status?: string;
-    policy_statuses?: { id: number }[];
+    policy_statuses?: { id: number; compliant: boolean }[];
   };
   os_family?: string;
   os_name?: string;
