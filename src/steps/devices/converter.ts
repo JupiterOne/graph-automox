@@ -34,7 +34,7 @@ export function createDeviceEntity(device: AutomoxDevice): Entity {
         osFamily: device.os_family,
         osName: device.os_name,
         osVersion: device.os_version,
-        osVersion_id: device.os_version_id,
+        osVersionId: device.os_version_id,
         'status.deviceStatus': device.status?.device_status,
         'status.agentStatus': device.status?.agent_status,
         'status.policyStatus': device.status?.policy_status,
