@@ -56,6 +56,16 @@ export type AutomoxDevice = {
     VENDOR: string;
     VERSION: string;
   };
+  status?: {
+    device_status?: string;
+    agent_status?: string;
+    policy_status?: string;
+    policy_statuses?: { id: number }[];
+  };
+  os_family?: string;
+  os_name?: string;
+  os_version?: string;
+  os_version_id?: number;
   serial_number: string;
   create_time: string;
   last_process_time: string;
