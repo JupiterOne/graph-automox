@@ -24,6 +24,7 @@ export type AutomoxUser = {
 export type AutomoxDevice = {
   id: number;
   name: string;
+  display_name: string;
   server_group_id: number;
   organization_id: number;
   uuid: string;
