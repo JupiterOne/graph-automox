@@ -8,6 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- `automox_device` entities now have the following new properties:
+
+  | Property       | Type       |
+  | -------------- | ---------- |
+  | `displayName`  | `string`   |
+  | `serialNumber` | `string`   |
+  | `macAddress`   | `string[]` |
+  | `lastSeenOn`   | `number`   |
+
 ## 1.1.0 - 2023-02-02
 
 ### Added

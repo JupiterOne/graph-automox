@@ -12,6 +12,10 @@ export function getDeviceKey(id: string): string {
 }
 
 export function createDeviceEntity(device: AutomoxDevice): Entity {
+  const serialNumber = device.serial_number;
+  const lastSeenOn = parseTimePropertyValue(device.last_refresh_time);
+  const macAddresses = getMacAddresses(device);
+
   return createIntegrationEntity({
     entityData: {
       source: device,
@@ -20,6 +24,7 @@ export function createDeviceEntity(device: AutomoxDevice): Entity {
         _class: Entities.DEVICE._class,
         _key: getDeviceKey(device.id.toString()),
         id: device.id.toString(),
+        displayName: device.display_name,
         name: device.name,
         serverGroupId: device.server_group_id,
         organizationId: device.organization_id,
@@ -29,7 +34,9 @@ export function createDeviceEntity(device: AutomoxDevice): Entity {
         category: 'endpoint',
         make: device.name,
         model: device.detail.MODEL,
-        serial: device.serial_number,
+        serial: serialNumber,
+        serialNumber,
+        macAddress: macAddresses.length ? macAddresses : undefined,
         deviceId: device.uuid,
         osFamily: device.os_family,
         osName: device.os_name,
@@ -42,11 +49,16 @@ export function createDeviceEntity(device: AutomoxDevice): Entity {
           (policyStatus) => policyStatus.id,
         ),
         lastProcessedOn: parseTimePropertyValue(device.last_process_time),
-        lastRefreshedOn: parseTimePropertyValue(device.last_refresh_time),
+        lastRefreshedOn: lastSeenOn,
+        lastSeenOn,
         lastScanFailedOn: parseTimePropertyValue(device.last_scan_failed),
         createdOn: parseTimePropertyValue(device.create_time),
         updatedOn: parseTimePropertyValue(device.last_update_time),
       },
     },
   });
+}
+
+function getMacAddresses(device: AutomoxDevice) {
+  return (device.detail.NICS || []).map((v) => v.MAC);
 }
