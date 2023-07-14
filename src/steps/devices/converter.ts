@@ -32,7 +32,7 @@ export function createDeviceEntity(device: AutomoxDevice): Entity {
         connected: device.connected,
         deleted: device.deleted,
         category: 'endpoint',
-        make: device.name,
+        make: device.detail.VENDOR,
         model: device.detail.MODEL,
         serial: serialNumber,
         serialNumber,
