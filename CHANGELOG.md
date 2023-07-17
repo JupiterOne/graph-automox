@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.2.1 - 2023-7-14
+
+- `automox_device` entities have corrected `make` property.
+
 ## 1.2.0 - 2023-05-16
 
 ### Added
