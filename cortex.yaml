@@ -1,0 +1,12 @@
+openapi: 3.0.1
+info:
+  title: '@jupiterone/graph-automox'
+  description: A JupiterOne Integration for ingesting data of the Automox
+  x-cortex-git:
+    github:
+      repository: JupiterOne/graph-automox
+  x-cortex-owners:
+    - type: group
+      name: JupiterOne/integrations
+  x-cortex-service-groups: tier-4
+  x-cortex-tag: '@jupiterone/graph-automox'
